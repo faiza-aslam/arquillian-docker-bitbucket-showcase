@@ -1,1 +1,0 @@
-# arquillian-docker-bitbucket-showcase

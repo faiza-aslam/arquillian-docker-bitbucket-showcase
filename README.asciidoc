@@ -1,0 +1,11 @@
+# arquillian-docker-bitbucket-showcase
+
+This is a sample repo of the post explained https://medium.com/@Fayeza_Aslam/run-dockerized-arquillian-tests-in-bitbucket-pipelines-9c6c37969c0b[here]
+
+Clone this project and run
+
+[source,xml]
+-----------------
+mvn clean install -Pwildfly-10
+-----------------
+

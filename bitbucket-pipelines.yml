@@ -1,0 +1,33 @@
+image: maven:3.5.0-jdk-8
+
+pipelines:
+  branches:
+    master:
+      - step:
+          size: 2x
+          caches:
+            - maven
+            - docker
+          script:
+            - echo "Committed on master branch..."
+            - mvn clean package -PQA
+          script:
+            - docker version
+            - docker pull faizaaslam/wildfly-admin:0.0.1
+            - docker create -p 8080:8080 -p 9990:9990 --name wildfly10 faizaaslam/wildfly-admin:0.0.1
+            - docker ps -a
+            - docker start wildfly10
+            - docker ps
+            - mvn clean verify -Pwildfly-10
+            - docker stop wildfly10
+            - docker rm wildfly10
+          services:
+            - docker
+
+definitions:
+  services:
+    maven:
+      image: maven:3.5.0-jdk-8
+      memory: 4096
+    docker:
+      memory: 2048
